@@ -1,0 +1,103 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y qemu-system-x86 curl wget
+
+    - name: Run Go tests
+      run: |
+        cd avm-go
+        go test -v ./...
+
+    - name: Build Go CLI
+      run: |
+        cd avm-go
+        go build -o avm-go .
+
+    - name: Test Bash scripts
+      run: |
+        bash -n install.sh
+        bash -n scripts/*.sh
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        args: --timeout=5m
+
+    - name: Check shell scripts
+      run: |
+        sudo apt-get install -y shellcheck
+        find . -name "*.sh" -exec shellcheck {} \;
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Build release binaries
+      run: |
+        cd avm-go
+        GOOS=linux GOARCH=amd64 go build -o avm-go-linux-amd64 .
+        GOOS=linux GOARCH=arm64 go build -o avm-go-linux-arm64 .
+        GOOS=android GOARCH=arm64 go build -o avm-go-android-arm64 .
+
+    - name: Create release archives
+      run: |
+        mkdir releases
+        tar -czf releases/avm-go-linux-amd64.tar.gz avm-go/avm-go-linux-amd64
+        tar -czf releases/avm-go-linux-arm64.tar.gz avm-go/avm-go-linux-arm64
+        tar -czf releases/avm-go-android-arm64.tar.gz avm-go/avm-go-android-arm64
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: avm-go-releases
+        path: releases/
+
+    - name: Deploy documentation
+      if: success()
+      run: |
+        # Deploy docs to GitHub Pages would go here
+        echo "Documentation deployment placeholder"

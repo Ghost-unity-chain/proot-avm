@@ -1,7 +1,7 @@
 
 #!/bin/bash
 # proot-avm One-Liner Installer
-# This script can be fetched with: curl -fsSL https://proot-avm.dev/install | sh
+# This script can be fetched with: curl -fsSL https://alpinevm.qzz.io/install | sh
 # Downloads all necessary scripts and sets up complete environment
 
 # Colors
@@ -13,8 +13,33 @@ CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
-# Configuration
-REPO_URL="${REPO_URL:-https://github.com/ghost-chain-unity/proot-avm/archive/main.tar.gz}"
+# Configuration - Auto-detect installation method
+if [ -n "$INSTALL_URL" ]; then
+    # Custom URL provided
+    if [[ "$INSTALL_URL" == *".github.io"* ]]; then
+        # GitHub Pages - use direct file serving
+        BASE_URL="${INSTALL_URL%/}"
+        REPO_URL="${BASE_URL}/install.sh"
+    else
+        # Raw GitHub or custom domain
+        BASE_URL="${INSTALL_URL%/}"
+        REPO_URL="${BASE_URL}/install.sh"
+    fi
+else
+    # Default: try GitHub Pages first, fallback to raw.githubusercontent
+    GITHUB_PAGES_URL="https://ghost-chain-unity.github.io/proot-avm"
+    RAW_GITHUB_URL="https://raw.githubusercontent.com/ghost-chain-unity/proot-avm/main"
+
+    # Test which URL is available
+    if curl -fs --max-time 5 "${GITHUB_PAGES_URL}/install.sh" >/dev/null 2>&1; then
+        BASE_URL="$GITHUB_PAGES_URL"
+        REPO_URL="${BASE_URL}/install.sh"
+    else
+        BASE_URL="$RAW_GITHUB_URL"
+        REPO_URL="https://github.com/ghost-chain-unity/proot-avm/archive/main.tar.gz"
+    fi
+fi
+
 INSTALL_DIR="${INSTALL_DIR:-$HOME/proot-avm-install}"
 TEMP_DIR="${TEMP_DIR:-/tmp/proot-avm-install}"
 

@@ -15,15 +15,16 @@
 ### Method 1: One-Command Install (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ghost-chain-unity/proot-avm/main/install-one-liner.sh | bash
+curl -fsSL https://alpinevm.qzz.io/install | bash
 ```
 
 This command:
-1. Downloads the complete repository with all scripts
-2. Installs all dependencies (proot-distro, QEMU, etc.)
-3. Sets up Alpine Linux VM with development environment
-4. Installs Go CLI and Bash scripts
-5. Configures `avm` command with auto-completion
+1. Auto-detects the best installation method (GitHub Pages or raw GitHub)
+2. Downloads the complete repository with all scripts
+3. Installs all dependencies (proot-distro, QEMU, etc.)
+4. Sets up Alpine Linux VM with development environment
+5. Installs Go CLI and Bash scripts
+6. Configures `avm` command with auto-completion
 
 ### Method 2: Binary Download (Fastest)
 
@@ -342,38 +343,46 @@ avm start headless 8080-:80,8443-:443
 ## Script Organization
 
 ### Recommended Scripts
-- **`install.sh`** - Main installer
-- **`install-one-liner.sh`** - One-liner installer
-- **`scripts/avm-agent.sh`** - Dev environment setup
-- **`scripts/enhanced-bootstrap.sh`** - Bootstrap script
-- **`scripts/alpine-vm.sh`** - VM manager
-- **`scripts/setup-alpine-auto.sh`** - Automated Alpine setup
+- **`scripts/install/install.sh`** - Main installer
+- **`scripts/install/install-one-liner.sh`** - One-liner installer
+- **`scripts/core/avm-go.sh`** - Go CLI launcher
+- **`scripts/core/dashboard-v2.sh`** - Web dashboard
+- **`scripts/core/tui.sh`** - Terminal UI
 
 ### Legacy Scripts (Deprecated)
-- **`install-agent.sh`** → Use `install.sh --agent`
-- **`setup-wizard.sh`** → Use `setup-wizard-enhanced.sh`
-- **`alpine-bootstrap.sh`** → Use `enhanced-bootstrap.sh`
+- **`install-agent.sh`** → Use `scripts/install/install.sh --agent`
+- **`setup-wizard.sh`** → Use `scripts/setup-wizard-enhanced.sh`
+- **`alpine-bootstrap.sh`** → Use `scripts/enhanced-bootstrap.sh`
 
-**Note**: Legacy scripts show deprecation warnings.
+**Note**: Legacy scripts show deprecation warnings and are maintained as symlinks.
 
 ### File Structure
 
 ```
 proot-avm/
-├── install.sh                 # Main installer
-├── install-one-liner.sh       # Curl entry point
+├── scripts/                   # Organized scripts
+│   ├── install/               # Installation scripts
+│   │   ├── install.sh         # Main installer
+│   │   ├── install-one-liner.sh # One-liner installer
+│   │   └── install-agent.sh   # Agent installer
+│   ├── core/                  # Core functionality
+│   │   ├── avm-go.sh          # Go CLI launcher
+│   │   ├── dashboard-v2.sh    # Web dashboard
+│   │   └── tui.sh             # Terminal UI
+│   └── utils/                 # Utilities
+│       ├── docs.sh            # Documentation viewer
+│       ├── build-binaries.sh  # Binary builder
+│       └── test-*.sh          # Test scripts
+├── *.sh                       # Symlinks for compatibility
 ├── PKGBUILD                   # Arch Linux package
 ├── README.md                  # Welcome & overview
 ├── SETUP.md                   # This detailed guide
 ├── configs/                   # Configuration files
 │   ├── alpine-answers.txt     # Alpine setup answers
 │   └── sshd_config           # SSH configuration
-└── scripts/                   # Core scripts
-    ├── shared-functions.sh    # Common functions
-    ├── alpine-vm.sh          # VM management
-    ├── avm-agent.sh          # Dev setup agent
-    ├── enhanced-bootstrap.sh # Bootstrap script
-    └── setup-alpine-auto.sh  # Auto Alpine setup
+└── docs/                      # Web documentation
+    ├── index.html             # GitHub Pages site
+    └── CNAME                  # Custom domain
 ```
 
 ## Development

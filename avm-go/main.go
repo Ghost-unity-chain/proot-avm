@@ -324,7 +324,7 @@ func firstBootSetup(c *cli.Context) error {
 	color.Cyan("🚀 Running automated first boot setup with AI assistance...")
 
 	// AI-assisted setup suggestions
-	aiResp := getAISuggestions("first boot setup")
+	aiResp := GetAISuggestions("first boot setup")
 	for _, suggestion := range aiResp.Suggestions {
 		color.Yellow("💡 %s", suggestion)
 	}
@@ -384,7 +384,7 @@ func aiAssist(c *cli.Context) error {
 		fmt.Printf("  %s %s - %s\n", status, name, provider.Description)
 	}
 
-	aiResp := getAISuggestions(query)
+	aiResp := GetAISuggestions(query)
 
 	color.Green("\n💡 AI Response:")
 	for _, suggestion := range aiResp.Suggestions {

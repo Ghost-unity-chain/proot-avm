@@ -1,6 +1,10 @@
 
 # proot-avm - Alpine VM Manager for Termux
 
+[![CI/CD](https://github.com/ghost-chain-unity/proot-avm/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ghost-chain-unity/proot-avm/actions/workflows/ci-cd.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ghost-chain-unity/proot-avm)](https://goreportcard.com/report/github.com/ghost-chain-unity/proot-avm)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🚀 What is proot-avm?
 
 proot-avm is a modern Alpine Linux VM manager for Termux that provides a complete development environment with Docker support. It automates the setup of QEMU virtual machines with pre-configured development tools.
@@ -22,9 +26,22 @@ proot-avm is a modern Alpine Linux VM manager for Termux that provides a complet
 
 ### Option 1: One-Liner Install (Recommended)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ghost-chain-unity/proot-avm/main/install-one-liner.sh | bash
+curl -fsSL https://alpinevm.qzz.io/install | bash
 ```
 **What's included:** Complete installation with all scripts, Go CLI, web dashboard, TUI, and documentation.
+
+### Option 2: Development Setup
+```bash
+# Clone repository
+git clone https://github.com/ghost-chain-unity/proot-avm.git
+cd proot-avm
+
+# Install development dependencies
+make dev-setup
+
+# Or manually
+./scripts/install/install.sh --dev
+```
 
 ### Option 2: Binary Download (Fastest)
 Download pre-compiled binaries for your platform:

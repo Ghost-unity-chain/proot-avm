@@ -35,7 +35,7 @@
 ### ✅ Installation Workflow
 ```bash
 # One-liner install
-curl -fsSL https://proot-avm.dev/install.sh | bash
+curl -fsSL https://alpinevm.qzz.io/install.sh | bash
 # ✅ Valid: Uses install-one-liner.sh → install.sh
 
 # Manual install

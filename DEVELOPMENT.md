@@ -39,17 +39,24 @@ proot-avm/
 │   ├── main.go               # CLI entry point
 │   ├── main_test.go          # Unit tests
 │   └── go.mod               # Go module file
-├── scripts/                   # Bash scripts
-│   ├── shared-functions.sh   # Common utilities
-│   ├── alpine-vm.sh         # VM management core
-│   ├── avm-agent.sh         # Development environment setup
-│   ├── enhanced-bootstrap.sh # Bootstrap script
-│   └── setup-alpine-auto.sh  # Automated Alpine setup
+├── scripts/                # All shell scripts (organized)
+│   ├── install/            # Installation scripts
+│   │   ├── install.sh
+│   │   ├── install-one-liner.sh
+│   │   └── install-agent.sh
+│   ├── core/               # Core functionality scripts
+│   │   ├── avm-go.sh       # Go CLI launcher
+│   │   ├── dashboard-v2.sh # Web dashboard
+│   │   └── tui.sh          # Terminal UI
+│   └── utils/              # Utility scripts
+│       ├── docs.sh
+│       ├── build-binaries.sh
+│       └── test-*.sh
 ├── configs/                   # Configuration templates
 │   ├── alpine-answers.txt    # Alpine installation answers
 │   └── sshd_config          # SSH server configuration
 ├── backup/                    # Legacy scripts (deprecated)
-├── *.sh                       # Main scripts and utilities
+├── *.sh                       # Symlinks to organized scripts
 ├── PKGBUILD                   # Arch Linux package build
 ├── README.md                  # Project overview
 ├── SETUP.md                   # Installation and usage guide
@@ -57,7 +64,7 @@ proot-avm/
 ├── CONTRIBUTING.md            # Contribution guidelines
 ├── ROADMAP.md                 # Future development roadmap
 ├── LICENSE                    # MIT license
-└── test-installer.sh          # Test suite
+└── test-installer.sh          # Test suite (legacy symlink)
 ```
 
 ## 🔧 Development Workflow

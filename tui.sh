@@ -336,7 +336,7 @@ SHORTCUTS:
   ?            Show this help
   Ctrl+C       Force quit
 
-For more information, visit: https://proot-avm.dev`
+For more information, visit: https://alpinevm.qzz.io`
 }
 
 func main() {

@@ -324,7 +324,7 @@ create_release_notes() {
 
 ### One-liner (Recommended)
 \`\`\`bash
-curl -fsSL https://proot-avm.dev/install | sh
+curl -fsSL https://alpinevm.qzz.io/install | sh
 \`\`\`
 
 ### Manual Installation
@@ -369,10 +369,10 @@ curl -fsSL https://proot-avm.dev/install | sh
 
 ## 📚 Documentation
 
-- [Getting Started Guide](https://proot-avm.dev/docs/getting-started/)
-- [User Guide](https://proot-avm.dev/docs/user-guide/)
-- [Developer Guide](https://proot-avm.dev/docs/developer/)
-- [API Reference](https://proot-avm.dev/docs/api/)
+- [Getting Started Guide](https://alpinevm.qzz.io/docs/getting-started/)
+- [User Guide](https://alpinevm.qzz.io/docs/user-guide/)
+- [Developer Guide](https://alpinevm.qzz.io/docs/developer/)
+- [API Reference](https://alpinevm.qzz.io/docs/api/)
 
 ## 🐛 Known Issues
 

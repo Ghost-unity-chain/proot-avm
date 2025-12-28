@@ -40,7 +40,7 @@ if [ ! -d "$DOCS_DIR" ]; then
 
     # Create config.toml
     cat > config.toml << 'EOF'
-baseURL = "https://proot-avm.dev"
+baseURL = "https://alpinevm.qzz.io"
 languageCode = "en-us"
 title = "proot-avm Documentation"
 theme = "hugo-book"
@@ -138,7 +138,7 @@ proot-avm is a powerful, modern virtual machine management platform designed spe
 
 ```bash
 # Install proot-avm
-curl -fsSL https://proot-avm.dev/install.sh | bash
+curl -fsSL https://alpinevm.qzz.io/install.sh | bash
 
 # Start your first VM
 avm-go first-boot
@@ -157,7 +157,7 @@ Join our community of developers building the future of mobile development:
 
 - [GitHub](https://github.com/ghost-chain-unity/proot-avm)
 - [Discord](https://discord.gg/proot-avm)
-- [Documentation](https://proot-avm.dev/docs)
+- [Documentation](https://alpinevm.qzz.io/docs)
 
 ---
 
@@ -187,7 +187,7 @@ Welcome to proot-avm! This guide will help you get up and running with your firs
 ### One-Line Install
 
 ```bash
-curl -fsSL https://proot-avm.dev/install.sh | bash
+curl -fsSL https://alpinevm.qzz.io/install.sh | bash
 ```
 
 ### Manual Install

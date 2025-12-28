@@ -394,7 +394,7 @@ func (ai *AIService) getMockResponse(messages []AIMessage) (*AIResponse, error) 
 }
 
 // getAISuggestions provides intelligent suggestions based on query
-func getAISuggestions(query string) AIResponse {
+func GetAISuggestions(query string) AIResponse {
 	ai, err := getAIService()
 	if err != nil {
 		color.Red("❌ AI service error: %v", err)

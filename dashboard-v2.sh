@@ -393,7 +393,7 @@ function getFallbackAssistance(query) {
         },
         'install': {
             suggestions: ['Installation options available:'],
-            commands: ['curl -fsSL https://raw.githubusercontent.com/ghost-chain-unity/proot-avm/main/install-one-liner.sh | bash']
+            commands: ['curl -fsSL https://alpinevm.qzz.io/install | bash']
         },
         'troubleshoot': {
             suggestions: ['Common troubleshooting steps:'],
